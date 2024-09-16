@@ -6,6 +6,7 @@ export interface StaffI {
     designation?: string;
     phone?: string;
     password?: string;
+    role?: string;
 
 }
 

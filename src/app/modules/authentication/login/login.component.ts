@@ -32,19 +32,19 @@ export class LoginComponent {
       if (formData.role === 'Manager') {
         // Logic for manager
         console.log('Redirect to Manager Dashboard');
-        if(this.authenticate(formData.username, formData.password))
+        if(this.authenticate(formData.username, formData.password, formData.role ))
         this.router.navigate(['./manager'],{replaceUrl: true})
       } else if (formData.role === 'Staff') {
         // Logic for staff
         console.log('Redirect to Staff Dashboard');
-        if(this.authenticate(formData.username, formData.password))
+        if(this.authenticate(formData.username, formData.password, formData.role ))
         this.router.navigate(['./staff'])       
       }
     }
   }
 
-  authenticate(user_id: string, password: string): StaffI {
-  return STAFF_DIRECTORY?.find(usr => usr.id === user_id)
+  authenticate(user_id: string, password: string, role: string): StaffI {
+  return STAFF_DIRECTORY?.find(usr => usr.id === user_id && password === usr.password && usr.role === role)
   }
 
 }

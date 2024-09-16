@@ -5,17 +5,20 @@ export const STAFF_DIRECTORY: Array<StaffI> = [
     {
         name: ' Vikas Sahayak',
         id: 'st_101',
-        password: 'abc123'
+        password: 'abc123',
+        role: 'Staff'
     },
     {
         name: 'Abhishek Sachiv',
         id: 'st_102',
-        password: 'abc123'
+        password: 'abc123',
+        role: 'Manager'
     },
     {
         name: 'Manju Pradhan',
         id: 'st_103',
-        password: 'abc123'
+        password: 'abc123',
+        role: 'Staff'
     }
 ];
 
