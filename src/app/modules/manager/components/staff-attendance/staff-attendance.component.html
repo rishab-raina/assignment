@@ -1,0 +1,40 @@
+<!-- <mat-card>
+    <mat-card-title>Staff List</mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let record of attendanceList">
+        <img matListAvatar [src]="record?.image.imageAsDataUrl" alt="{{ record?.user?.name }}" />
+        <h4 matLine>{{ record?.user?.name }}</h4>
+        <p matLine>{{ record?.timestamp }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card> -->
+  <!-- <mat-list>
+    <mat-list-item *ngFor="let record of attendanceList">
+      <img matListItemAvatar [src]="record?.image.imageAsDataUrl" alt="{{ record?.user?.name }}">
+      <h3 matListItemTitle>{{record?.user?.id}}</h3>
+      <p matListItemLine>
+        <span>{{record?.user?.name}}</span>
+        <span class="demo-2"> -- {{record?.timestamp}}</span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+   -->
+
+   <mat-list *ngIf="attendanceList?.length; else noAttendance">
+    <mat-list-item *ngFor="let record of attendanceList">
+      <img matListItemAvatar [src]="record?.image.imageAsDataUrl" alt="{{ record?.user?.name }}">
+      <h3 matListItemTitle>{{record?.user?.name}}</h3>
+      <p >
+        <span> <strong>Staff Id:</strong>  {{record?.user?.id}}</span>
+        </p>
+        <p>
+        <span class="demo-2"><strong>Attendance Marked </strong> -- {{record?.timestamp}}</span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+
+  <ng-template #noAttendance>
+    <h2>No attendance marked yet!!!</h2>
+  </ng-template>
+  
+  

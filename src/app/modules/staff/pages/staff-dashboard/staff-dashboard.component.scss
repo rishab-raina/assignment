@@ -1,0 +1,25 @@
+mat-card {
+  
+  padding: 2%;
+  box-shadow: 0px 4px 10px rgba(231, 10, 10, 0.2); /* Custom shadow */
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.container {
+    height: 100vh; /* Full viewport height to vertically center the content */
+  }
+  mat-card .staff-card 
+    {
+        padding: 1% 60% 40% 1%;
+        
+        box-shadow: 0px 4px 10px rgba(231, 10, 10, 0.2);
+        border-radius: 8px;
+        background-color: #ffffff;
+    }
+
+    .attendance-button{
+        padding-left: 45%;
+        padding-top: 5%;
+    }
+  

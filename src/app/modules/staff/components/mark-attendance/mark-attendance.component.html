@@ -1,0 +1,64 @@
+<div style="text-align: center; margin-top: 10px">
+  <strong>Staff Attendance Window</strong>
+</div>
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ user?.name }}</mat-card-title>
+      <mat-card-subtitle>{{ user?.id }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <webcam
+        [width]="webcamWidth"
+        [height]="webcamHeight"
+        [trigger]="triggerObservable"
+        (imageCapture)="handleImage($event)"
+        *ngIf="showWebcam"
+        [allowCameraSwitch]="allowCameraSwitch"
+        [switchCamera]="nextWebcamObservable"
+        [videoOptions]="videoOptions"
+        [imageQuality]="1"
+        (cameraSwitched)="cameraWasSwitched($event)"
+        (initError)="handleInitError($event)"
+      ></webcam>
+      <ng-container>
+        <h4 *ngIf="errors.length > 0">Messages:</h4>
+        <ul *ngFor="let error of errors">
+          <li>{{ error | json }}</li>
+        </ul>
+      </ng-container>
+
+      <p *ngIf="!errors?.length">Click on camera icon to capture</p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!errors?.length">
+      <button mat-button (click)="triggerSnapshot()">
+        <mat-icon>camera_alt</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="webcamImage" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ user?.name }}</mat-card-title>
+      <mat-card-subtitle>{{ user?.id }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="snapshot">
+        <img [src]="webcamImage.imageAsDataUrl" />
+      </div>
+      <p>This is your snapshot preview!
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="markAttendance()" mat-stroked-button color="primary">
+        Mark Attendance
+      </button>
+      <button (click)="webcamImage = undefined" mat-button color="warn">
+        DISCARD
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

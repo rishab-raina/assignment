@@ -1,0 +1,85 @@
+// // mat-list-item {
+// //     margin-bottom: 15px;
+// //   }
+  
+// //   img[matListAvatar] {
+// //     border-radius: 50%;
+// //     height: 50px;
+// //     width: 50px;
+// //   }
+  
+// //   h4 {
+// //     margin: 0;
+// //   }
+  
+// //   p {
+// //     margin: 0;
+// //     color: gray;
+// //   }
+  
+
+// mat-list-item {
+//     margin-bottom: 15px;
+//     align-items: center; /* Ensure proper vertical alignment of the image and text */
+//   }
+  
+//   /* Ensuring avatar is properly sized */
+//   img[matListAvatar] {
+//     border-radius: 50%;
+//     height: 60px;   /* Adjust the height */
+//     width: 60px;    /* Adjust the width */
+//     object-fit: cover; /* Ensures the image fits inside the avatar area */
+//   }
+  
+//   /* Styling for the text */
+//   mat-list-item div {
+//     display: flex;
+//     flex-direction: column;  /* Ensures the h4 and p tags are stacked */
+//     justify-content: center; /* Vertical alignment of text within the item */
+//   }
+  
+//   h4 {
+//     margin: 0;
+//   }
+  
+//   p {
+//     margin: 0;
+//     color: gray;
+//     font-size: 14px;  /* Adjust font size to make it visible */
+//   }
+  
+
+/* Increase the height of each list item */
+mat-list-item {
+    height: 120px !important; /* Adjust the height as needed */
+    align-items: center; /* Ensure proper vertical alignment */
+    background-color: rgb(246, 249, 248);
+    border-radius: 15px;
+    margin-top: 2px;
+  }
+  
+  /* Increase the size of the avatar */
+  img[matListItemAvatar] {
+    border-radius: 50%;  /* Keep avatar circular */
+    height: 100px;        /* Adjust the height of the avatar */
+    width: 100px;         /* Adjust the width of the avatar */
+    object-fit: cover;   /* Ensure the image fits inside the avatar area */
+  }
+  
+  /* Styling for the text */
+  mat-list-item h3 {
+    font-size: 18px;    /* Adjust font size for the title */
+    margin: 0;
+  }
+  
+  mat-list-item p {
+    margin: 0;
+    font-size: 14px;    /* Adjust font size for the secondary line */
+    color: gray;
+  }
+  
+  /* Adjust spacing between title and secondary text */
+  mat-list-item p span {
+    margin-left: 5px;
+  }
+  

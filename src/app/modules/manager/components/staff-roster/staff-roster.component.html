@@ -1,0 +1,37 @@
+<div class="example-container" [formGroup]="form">
+    <ng-container formArrayName="records" *ngIf="tableData?.length">
+        <mat-table #table [dataSource]="dataSource">
+            <ng-container *ngFor="let column of columnStructure; let j = index" [matColumnDef]="column?.label">
+
+                <mat-header-cell [ngClass]="[column?.dataType]" *matHeaderCellDef> {{column?.label}} </mat-header-cell>
+                <mat-cell
+                    [ngClass]="[!column.isEditable || element?.readonly? 'readonly-true': 'readonly-false', column?.dataType]"
+                    *matCellDef="let element;let i = index" [formGroupName]="i">
+                    <!-- <span>{{records.controls[i].get(column?.columnId)?.invalid}}</span> -->
+                    <div class="type1-form-field p-0 m-t5">
+                        <mat-form-field *ngIf="column?.dataType === 'text' || column?.dataType === 'number'"  [ngClass]="[records.controls[i].get(column?.columnId)?.invalid ? 'type1-form-field-invalid' : '']"
+                        appearance="outline" class="form-field__field" >
+                        <input [type]="column?.dataType" [readonly]="!column.isEditable || element?.readonly " matInput placeholder=""
+                                [formControlName]="column?.columnId">
+                        </mat-form-field>
+                        <mat-form-field *ngIf="column?.dataType === 'select'" appearance="outline">
+                            <mat-label>Choose an option</mat-label>
+                            <mat-select [formControlName]="column?.columnId">
+                              <mat-option *ngFor="let option of column?.selectionList" [value]="option">{{option}}</mat-option>
+                             
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    
+                </mat-cell>
+                
+            </ng-container>
+
+          
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+           
+        </mat-table>
+    </ng-container>
+</div>
