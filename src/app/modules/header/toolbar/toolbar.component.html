@@ -1,9 +1,10 @@
 <mat-toolbar color="primary">
-    <span>Staff Management</span>
-    <span class="spacer"></span>
+  <span>Staff Management</span>
+  <span class="spacer"></span>
+  <ng-container *ngIf="isLoggedIn">
     <button mat-button (click)="logout()">
       <mat-icon>logout</mat-icon>
       Logout
     </button>
-  </mat-toolbar>
-  
+  </ng-container>
+</mat-toolbar>

@@ -18,10 +18,10 @@ export interface AttendanceI {
     image: any
 }
 
-export interface Type1TableSchemaI {
+export interface TableSchemaI {
     label: string;
     isEditable: boolean;
-    dataType?: string; // THIS HAS TO BE USED FOR SPACING THE NUMERIC, TEXT COLUMNS DISTINCTLY
+    dataType?: string; 
     columnId?: string;
     validators?: ValidatorFn[];
     selectionList?: Array<any>;

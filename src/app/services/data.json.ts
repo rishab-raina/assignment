@@ -1,6 +1,7 @@
 import { Validators } from "@angular/forms";
 import { AttendanceI, StaffI } from "../interfaces/staff.interface";
 
+//EXISTING STAFF DATA 
 export const STAFF_DIRECTORY: Array<StaffI> = [
     {
         name: ' Vikas Sahayak',
@@ -26,25 +27,25 @@ export const STAFF_ATTENDANCE: Array<AttendanceI> = [
 
 ];
 
-export const ELEMENT_DATA_staff_type: any[] = [
+export const ELEMENT_DATA_STAFF_ROSTER: any[] = [
     {
       staff_id: 'st_101',
       name: STAFF_DIRECTORY.find(s=> s.id === 'st_101').name,
-      zone: 1,
+      zone: '1',
       staff_type: 'Permanent',
       shift_type: 'Day',
     },
     {
       staff_id: 'st_102',
       name: STAFF_DIRECTORY.find(s=> s.id === 'st_102').name,
-      zone: 4,
+      zone: '4',
       staff_type: 'Permanent',
       shift_type: 'Night',
     },
     {
       staff_id: 'st_103',
       name: STAFF_DIRECTORY.find(s=> s.id === 'st_103').name,
-      zone: 6,
+      zone: '6',
       staff_type: 'Permanent',
       shift_type: 'Day',
     }
@@ -57,16 +58,16 @@ export const ELEMENT_DATA_staff_type: any[] = [
 // ENTIRELY CONFIGURABLE TO MAKE IT GENERIC CAN BE USED IN ANY SETTING
 // EDITABLE FIELDS CAN BE CONFIGURABLE
 //TYPE OF INPUT (COLUMN TYPE)CAN ALSO BE CONFIGURED
-  export const TABLE_SCHEMA_Roster = [
+  export const TABLE_SCHEMA_ROSTER = [
     {
       label: 'Staff Id',
-      isEditable: false,
+      isEditable: true,
       dataType: 'text',
       columnId: 'staff_id',
     },
     {
       label: 'Staff Name',
-      isEditable: false,
+      isEditable: true,
       dataType: 'text',
       columnId: 'name',
     },

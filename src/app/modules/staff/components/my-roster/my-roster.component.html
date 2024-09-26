@@ -1,25 +1,32 @@
-<mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-subtitle>{{staffRoster?.staff_id}}</mat-card-subtitle>
-      <mat-card-title>{{staffRoster?.name}}</mat-card-title>
-      
-    </mat-card-header>
-    <mat-card-content *ngIf="staffRoster; else noRosterFound">
-      <p>Your shift details are as:</p>
-      <mat-divider></mat-divider>
-      <p>Employment Type  ---   {{ staffRoster?.staff_type }}</p>
-      <mat-divider></mat-divider>
-      <p>Working Zone  ---   {{ staffRoster?.zone }}</p>
-      <mat-divider></mat-divider>
-      <p>Shift Type  ---   {{ staffRoster?.shift_type }}</p>
-      
-      
-    </mat-card-content>
+<div fxLayout="row" fxLayoutAlign="space-around center" >
+    <mat-card style="width: 30%;" class="example-card">
+        <mat-card-header >
+          <mat-card-subtitle>{{staffRoster?.staff_id}}</mat-card-subtitle>
+          <mat-card-title>{{staffRoster?.name}}</mat-card-title>
+          
+        </mat-card-header>
+        <mat-card-content *ngIf="staffRoster; else noRosterFound">
+          <p>Your Roster details are as:</p>
+          
+          <span>Employment Type <mat-chip class="my-chip">{{ staffRoster?.staff_type }}</mat-chip></span>
+          
+          <p>Working Zone <mat-chip class="my-chip">{{ staffRoster?.zone }}</mat-chip></p>
+           
+          <p>Shift Type <mat-chip class="my-chip">{{ staffRoster?.shift_type }}</mat-chip></p>
+          
+          
+        </mat-card-content>
+    
+      </mat-card>
+    <div>
+        <h1>Welcome to the Staff Portal</h1>
+        <h3>Have a great day!!!</h3>
 
-    <mat-card-footer>
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </mat-card-footer>
-  </mat-card>
+    </div>
+  
+
+</div>
+
 
   <ng-template #noRosterFound>
     <strong> No Records found</strong>

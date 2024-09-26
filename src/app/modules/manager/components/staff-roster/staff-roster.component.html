@@ -1,4 +1,8 @@
 <div class="example-container" [formGroup]="form">
+    
+    <button mat-fab color="primary" aria-label="Example icon button with a bookmark icon" (click)="onAddStaff()">
+        <mat-icon>add</mat-icon>
+      </button>
     <ng-container formArrayName="records" *ngIf="tableData?.length">
         <mat-table #table [dataSource]="dataSource">
             <ng-container *ngFor="let column of columnStructure; let j = index" [matColumnDef]="column?.label">
@@ -8,7 +12,7 @@
                     [ngClass]="[!column.isEditable || element?.readonly? 'readonly-true': 'readonly-false', column?.dataType]"
                     *matCellDef="let element;let i = index" [formGroupName]="i">
                     <!-- <span>{{records.controls[i].get(column?.columnId)?.invalid}}</span> -->
-                    <div class="type1-form-field p-0 m-t5">
+                    <div class="p-10">
                         <mat-form-field *ngIf="column?.dataType === 'text' || column?.dataType === 'number'"  [ngClass]="[records.controls[i].get(column?.columnId)?.invalid ? 'type1-form-field-invalid' : '']"
                         appearance="outline" class="form-field__field" >
                         <input [type]="column?.dataType" [readonly]="!column.isEditable || element?.readonly " matInput placeholder=""

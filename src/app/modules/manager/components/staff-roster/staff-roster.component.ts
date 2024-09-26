@@ -1,58 +1,46 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  Renderer2,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
-  FormGroup,
   ValidatorFn,
-  Validators,
 } from '@angular/forms';
 import {
   MatTableDataSource,
-  MatTableDataSourcePaginator,
 } from '@angular/material/table';
-import { Type1TableSchemaI } from 'src/app/interfaces/staff.interface';
+import { TableSchemaI } from 'src/app/interfaces/staff.interface';
 import { AssignmentService } from 'src/app/services/assignment.service';
-import {
-  ELEMENT_DATA_staff_type,
-  TABLE_SCHEMA_Roster,
-} from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-staff-roster',
   templateUrl: './staff-roster.component.html',
   styleUrls: ['./staff-roster.component.scss'],
 })
-export class StaffRosterComponent {
-  columnStructure: Type1TableSchemaI[] = TABLE_SCHEMA_Roster;
-
-  tableData = ELEMENT_DATA_staff_type; // actual data of table
-  totalMarks: any; // actual data of table
-
-  historyData: Array<any> = [];
+export class StaffRosterComponent implements OnInit {
+  columnStructure: TableSchemaI[] = [];
+  tableData; // actual data of table
   displayedColumns!: Array<any>;
   dataSource: any;
   form = this.fb.group({ records: this.fb.array([]) });
 
   constructor(
     private fb: FormBuilder,
-    private renderer: Renderer2,
     private assignmentService: AssignmentService
   ) {}
+
   get records() {
     return this.form.controls['records'] as FormArray;
   }
+
   set records(val) {
     this.records = val;
   }
+
   ngOnInit(): void {
+    
+    this.tableData = this.assignmentService.getAllRosterData();
+     this.columnStructure = this.assignmentService.getColumnStructure();
+
     this.records.clear();
     this.initilizeTable(); //SUBSCRIBE TO FORM --start
     this.form.valueChanges.subscribe((form) => {
@@ -66,23 +54,21 @@ export class StaffRosterComponent {
         this.columnStructure,
         this.records.controls
       );
-      
     }); //SUBSCRIBE TO FORM --end
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.records.clear();
-    this.initilizeTable();
-    console.log('check onCChanges', changes);
-  }
+
+  //Get the validators from schema 
   columHasValidators(columId: string): ValidatorFn[] {
     const columnDetails = this.columnStructure.find(
       (col) => col?.columnId === columId
     );
     return columnDetails?.validators;
   }
+
+  //INITIALIZE FORM
   initilizeTable(): void {
-    //INITIALIZE FORM --start  // this.tableData?.forEach(rec => {
+   
     for (let i = 0; i < this.tableData?.length; i++) {
       let rec = this.tableData[i]; //ADDING VALIDATORS FROM COLUMN SCHEMA-- start
       const group = this.fb.group({});
@@ -106,31 +92,30 @@ export class StaffRosterComponent {
         ' ~ file: type1-table.component.ts:92 ~ this.records:',
         this.records
       );
-      this.populateData();
+      
     }
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity(); // )  // INITIALIZE FORM --end  //
-   
+
     console.log('tableData');
     this.dataSource = new MatTableDataSource(this.tableData);
     this.displayedColumns = this.columnStructure.map((col) => col?.label);
   }
-  populateData() {
-    console.log(
-      ' ~ file: type1-table.component.ts:108 ~ populateData ~ this.historyData:',
-      this.historyData
-    );
-    if (this.historyData?.length > 0) {
-      for (let i = 0; i < this.records.value.length; i++) {
-        this.records?.controls[i]
-          ?.get('Marks')
-          .patchValue(this.historyData[i].value);
-      }
-      console.log(
-        ' ~ file: type1-table.component.ts:111 ~ populateData ~ this.records:',
-        this.records
-      );
-      
-    }
+
+  onAddStaff() {
+    const emptyRosterObject =
+      this.createEmptyObjectFromSchema(this.columnStructure);
+    this.tableData.push(emptyRosterObject);
+    this.records.clear();
+    this.initilizeTable();
+  }
+
+  createEmptyObjectFromSchema(schema) {
+    const emptyObject = {};
+    schema.forEach((item) => {
+      // Using the 'label' as the key and setting initial value based on type
+      if (item?.columnId) emptyObject[item?.columnId] = ' '; // Default value for a new object
+    });
+    return emptyObject;
   }
 }

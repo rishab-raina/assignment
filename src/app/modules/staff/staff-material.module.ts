@@ -4,17 +4,18 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   
   exports: [
-    MatProgressBarModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatChipsModule
   ]
 })
 export class StaffMaterialModule { }
